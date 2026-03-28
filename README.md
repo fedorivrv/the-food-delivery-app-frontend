@@ -30,10 +30,10 @@ src/
 │   ├── page.tsx            # Redirects → /shop
 │   ├── shop/
 │   │   ├── page.tsx        # Shop page
-│   │   └── shop.module.css
+│   │   └── page.module.css
 │   └── cart/
 │       ├── page.tsx        # Cart page
-│       └── cart.module.css
+│       └── page.module.css
 ├── components/
 │   ├── Navbar/
 │   ├── ShopList/
@@ -45,7 +45,7 @@ src/
 ├── lib/
 │   └── api.ts              # Axios instance + endpoints
 ├── types/
-│   └── index.ts            # Shared TypeScript types
+│   └── types.ts            # Shared TypeScript types
 └── styles/
     └── globals.css         # CSS variables, reset, fonts
 ```

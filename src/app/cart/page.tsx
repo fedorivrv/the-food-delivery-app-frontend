@@ -1,7 +1,7 @@
 'use client';
 import { useCartStore } from '@/store/carStore';
-import CartItem from '@/app/components/CarItem/CartItem';
-import OrderForm from '@/app/components/OrderForm/OrderForm';
+import CartItem from '@/components/CarItem/CartItem';
+import OrderForm from '@/components/OrderForm/OrderForm';
 import styles from './page.module.css';
 
 export default function CartPage() {

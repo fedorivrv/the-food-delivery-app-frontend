@@ -3,8 +3,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Shop, Product } from '@/types/types';
 import { getShops, getProductsByShop } from '@/lib/api';
-import ShopList from '@/app/components/ShopList/ShopList';
-import ProductGrid from '@/app/components/ProductGrid/ProductGrid';
+import ShopList from '@/components/ShopList/ShopList';
+import ProductGrid from '@/components/ProductGrid/ProductGrid';
 import styles from './page.module.css';
 
 export default function ShopPage() {

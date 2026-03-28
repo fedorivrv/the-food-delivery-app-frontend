@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from './components/NavBar/NavBar';
+import Navbar from '../components/NavBar/NavBar';
 
 export const metadata: Metadata = {
   title: 'Delivery — Food at Your Door',
