@@ -3,7 +3,12 @@ export interface Shop {
   name: string;
   description?: string;
   imageUrl?: string;
+  rating: number;
 }
+
+export type ProductCategory =
+  | 'Burgers' | 'Chicken' | 'Pizza' | 'Sushi'
+  | 'Drinks' | 'Desserts' | 'Sides' | 'Salads';
 
 export interface Product {
   _id: string;
@@ -12,6 +17,7 @@ export interface Product {
   imageUrl?: string;
   shopId: string;
   description?: string;
+  category: ProductCategory;
 }
 
 export interface CartItem {
@@ -38,3 +44,5 @@ export interface Order {
   customerInfo: OrderFormData;
   totalPrice: number;
 }
+
+export type SortOption = 'name-asc' | 'price-asc' | 'price-desc';
