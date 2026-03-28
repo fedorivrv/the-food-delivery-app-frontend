@@ -1,0 +1,138 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.catChip {
+  padding: 5px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.catChip:hover {
+  border-color: var(--border-light);
+  color: var(--text-primary);
+}
+
+.catChip.active {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.clearBtn {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--error);
+  border-radius: 20px;
+  color: var(--error);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: var(--font-body);
+  opacity: 0.75;
+}
+
+.clearBtn:hover {
+  opacity: 1;
+  background: var(--error-bg);
+}
+
+/* Sort */
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.sortLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+
+.sortOptions {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.sortBtn {
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+.sortBtn:hover {
+  color: var(--text-primary);
+}
+
+.sortBtn.sortActive {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .sortWrap {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sortOptions {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .sortBtn {
+    flex: 1;
+    text-align: center;
+  }
+}
