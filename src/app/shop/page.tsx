@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useTransition } from 'react';
 import { Shop, Product, ProductCategory, SortOption } from '@/types/types';
 import { getShops, getProductsByShop } from '@/lib/api';
 import ShopList from '@/components/ShopList/ShopList';
@@ -8,25 +8,22 @@ import FilterBar from '@/components/FilterBar/FilterBar';
 import styles from './page.module.css';
 
 export default function ShopPage() {
-  const [shops, setShops] = useState<Shop[]>([]);
   const [allShops, setAllShops] = useState<Shop[]>([]);
   const [selectedShop, setSelectedShop] = useState<Shop | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
-  const [loadingShops, setLoadingShops] = useState(true);
-  const [loadingProducts, setLoadingProducts] = useState(false);
+  const [loadingShops, setLoadingShops] = useState(true);  
   const [error, setError] = useState<string | null>(null);
 
   // Filters
   const [selectedCategories, setSelectedCategories] = useState<ProductCategory[]>([]);
   const [sortOption, setSortOption] = useState<SortOption>('name-asc');
   const [ratingFilter, setRatingFilter] = useState<string>('all');
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    setLoadingShops(true);
     getShops()
       .then((res) => {
         setAllShops(res.data);
-        setShops(res.data);
         if (res.data.length > 0) setSelectedShop(res.data[0]);
       })
       .catch(() => setError('Failed to load shops'))
@@ -34,27 +31,40 @@ export default function ShopPage() {
   }, []);
 
   // Filter shops by rating
-  useEffect(() => {
+  const filteredShops = useMemo(() => {
     if (ratingFilter === 'all') {
-      setShops(allShops);
+      return allShops;
     } else {
       const [min, max] = ratingFilter.split('-').map(Number);
-      const filtered = allShops.filter((s) => s.rating >= min && s.rating < max);
-      setShops(filtered);
-      if (selectedShop && !filtered.find((s) => s._id === selectedShop._id)) {
-        setSelectedShop(filtered[0] ?? null);
-      }
+      return allShops.filter((s) => s.rating >= min && s.rating < max);
     }
   }, [ratingFilter, allShops]);
 
+
   useEffect(() => {
-    if (!selectedShop) { setProducts([]); return; }
-    setLoadingProducts(true);
-    setProducts([]);
+    if (!selectedShop) return;
+    
+    let isMounted = true;
+    
     getProductsByShop(selectedShop._id)
-      .then((res) => setProducts(res.data))
-      .catch(() => setError('Failed to load products'))
-      .finally(() => setLoadingProducts(false));
+      .then((res) => {
+        if (isMounted) {
+          startTransition(() => {
+            setProducts(res.data);
+          });
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          startTransition(() => {
+            setError('Failed to load products');
+          });
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [selectedShop]);
 
   // Derive available categories from current products
@@ -83,6 +93,20 @@ export default function ShopPage() {
     );
   };
 
+  const handleRatingFilterChange = (rating: string) => {
+    setRatingFilter(rating);
+    const newFilteredShops = rating === 'all' 
+      ? allShops 
+      : (() => {
+          const [min, max] = rating.split('-').map(Number);
+          return allShops.filter((s) => s.rating >= min && s.rating < max);
+        })();
+    
+    if (selectedShop && !newFilteredShops.find((s) => s._id === selectedShop._id)) {
+      setSelectedShop(newFilteredShops[0] ?? null);
+    }
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -95,7 +119,7 @@ export default function ShopPage() {
                 <button
                   key={r}
                   className={`${styles.ratingBtn} ${ratingFilter === r ? styles.ratingActive : ''}`}
-                  onClick={() => setRatingFilter(r)}
+                  onClick={() => handleRatingFilterChange(r)}
                 >
                   {r === 'all' ? 'All ratings' : `${r.replace('-', '.0 – ')}.0 ★`}
                 </button>
@@ -108,7 +132,7 @@ export default function ShopPage() {
               {[1, 2, 3, 4].map((i) => <div key={i} className={styles.skeletonShop} />)}
             </div>
           ) : (
-            <ShopList shops={shops} selectedShop={selectedShop} onSelect={setSelectedShop} />
+            <ShopList shops={filteredShops} selectedShop={selectedShop} onSelect={setSelectedShop} />
           )}
         </aside>
 
@@ -138,7 +162,7 @@ export default function ShopPage() {
             resultCount={displayedProducts.length}
           />
 
-          <ProductGrid products={displayedProducts} loading={loadingProducts} />
+          <ProductGrid products={displayedProducts} loading={isPending} />
         </section>
       </div>
     </div>
