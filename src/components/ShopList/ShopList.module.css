@@ -9,13 +9,13 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 10px 12px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -35,8 +35,8 @@
 }
 
 .shopDot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--border-light);
   flex-shrink: 0;
@@ -48,9 +48,38 @@
   box-shadow: 0 0 6px var(--accent-dim);
 }
 
+.shopName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.shopBtn.active .rating {
+  color: var(--accent-dim);
+}
+
+.star {
+  color: var(--accent);
+  font-size: 11px;
+}
+
 .empty {
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
   padding: 20px 0;
+  line-height: 1.5;
 }

@@ -7,9 +7,18 @@ interface Props {
   onSelect: (shop: Shop) => void;
 }
 
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <span className={styles.rating}>
+      <span className={styles.star}>★</span>
+      {rating.toFixed(1)}
+    </span>
+  );
+}
+
 export default function ShopList({ shops, selectedShop, onSelect }: Props) {
   if (shops.length === 0) {
-    return <p className={styles.empty}>No shops available</p>;
+    return <p className={styles.empty}>No shops match the filter</p>;
   }
 
   return (
@@ -21,7 +30,8 @@ export default function ShopList({ shops, selectedShop, onSelect }: Props) {
             onClick={() => onSelect(shop)}
           >
             <span className={styles.shopDot} />
-            {shop.name}
+            <span className={styles.shopName}>{shop.name}</span>
+            <StarRating rating={shop.rating} />
           </button>
         </li>
       ))}
