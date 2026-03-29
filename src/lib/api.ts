@@ -17,5 +17,9 @@ export const getProductsByShop = (
 
 export const createOrder = (orderData: object) => api.post('/orders', orderData);
 
-export const getOrdersByEmail = (email: string) =>
-  api.get(`/orders/by-email/${encodeURIComponent(email)}`);
+// Search orders by email+phone OR orderId
+export const searchOrders = (params: {
+  email?: string;
+  phone?: string;
+  orderId?: string;
+}) => api.get('/orders/search', { params });

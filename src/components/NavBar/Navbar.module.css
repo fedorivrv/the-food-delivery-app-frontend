@@ -17,38 +17,12 @@
   justify-content: space-between;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logoIcon { font-size: 22px; filter: drop-shadow(0 0 8px rgba(232,168,64,0.4)); }
+.logoText { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; }
 
-.logoIcon {
-  font-size: 22px;
-  filter: drop-shadow(0 0 8px rgba(232, 168, 64, 0.4));
-}
-
-.logoText {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -0.5px;
-}
-
-/* Desktop */
-.links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.divider {
-  width: 1px;
-  height: 20px;
-  background: var(--border);
-}
+.links { display: flex; align-items: center; gap: 8px; }
+.divider { width: 1px; height: 20px; background: var(--border); }
 
 .link {
   position: relative;
@@ -58,29 +32,18 @@
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius-sm);
-  transition:
-    color 0.2s,
-    background 0.2s;
+  transition: color 0.2s, background 0.2s;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.link:hover {
-  color: var(--text-primary);
-  background: var(--surface-2);
-}
-
-.link.active {
-  color: var(--accent);
-}
-
+.link:hover { color: var(--text-primary); background: var(--surface-2); }
+.link.active { color: var(--accent); }
 .link.active::after {
   content: '';
   position: absolute;
-  bottom: -22px;
-  left: 16px;
-  right: 16px;
+  bottom: -22px; left: 16px; right: 16px;
   height: 2px;
   background: var(--accent);
   border-radius: 2px;
@@ -101,7 +64,6 @@
   animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Mobile burger */
 .burger {
   display: none;
   position: relative;
@@ -113,8 +75,7 @@
 
 .burgerBadge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 2px; right: 2px;
   background: var(--accent);
   color: var(--bg);
   font-size: 10px;
@@ -128,32 +89,12 @@
   padding: 0 3px;
 }
 
-.burgerIcon {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 22px;
-}
+.burgerIcon { display: flex; flex-direction: column; gap: 5px; width: 22px; }
+.burgerIcon span { display: block; height: 2px; background: var(--text-primary); border-radius: 2px; transition: all 0.25s; }
+.burgerOpen span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burgerOpen span:nth-child(2) { opacity: 0; }
+.burgerOpen span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.burgerIcon span {
-  display: block;
-  height: 2px;
-  background: var(--text-primary);
-  border-radius: 2px;
-  transition: all 0.25s;
-}
-
-.burgerOpen span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.burgerOpen span:nth-child(2) {
-  opacity: 0;
-}
-.burgerOpen span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* Mobile dropdown */
 .mobileMenu {
   display: flex;
   flex-direction: column;
@@ -176,52 +117,13 @@
   transition: all 0.18s;
 }
 
-.mobileLink:hover {
-  background: var(--surface-2);
-  color: var(--text-primary);
-}
-
-.mobileLink.mobileActive {
-  color: var(--accent);
-}
+.mobileLink:hover { background: var(--surface-2); color: var(--text-primary); }
+.mobileLink.mobileActive { color: var(--accent); }
 
 @media (max-width: 600px) {
-  .links {
-    display: none;
-  }
-  .burger {
-    display: flex;
-  }
+  .links { display: none; }
+  .burger { display: flex; }
 }
 
-@keyframes popIn {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 480px) {
-  .inner {
-    padding: 0 16px;
-  }
-  .logoText {
-    font-size: 18px;
-  }
-  .link {
-    padding: 6px 10px;
-    font-size: 13px;
-  }
-}
+@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }

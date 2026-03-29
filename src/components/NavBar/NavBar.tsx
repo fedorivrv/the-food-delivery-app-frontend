@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useCartStore } from '@/store/cartStore';
 import styles from './Navbar.module.css';
 
@@ -11,10 +11,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Only show cart count after hydration to avoid SSR mismatch
-  useLayoutEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   const cartCount = mounted ? totalItems : 0;
 
@@ -28,18 +25,16 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className={styles.links}>
-          <Link
-            href="/shop"
-            className={`${styles.link} ${pathname === '/shop' ? styles.active : ''}`}
-          >
+          <Link href="/shop" className={`${styles.link} ${pathname === '/shop' ? styles.active : ''}`}>
             Shop
           </Link>
           <div className={styles.divider} />
-          <Link
-            href="/cart"
-            className={`${styles.link} ${pathname === '/cart' ? styles.active : ''}`}
-          >
-            Shopping Cart
+          <Link href="/orders" className={`${styles.link} ${pathname === '/orders' ? styles.active : ''}`}>
+            My Orders
+          </Link>
+          <div className={styles.divider} />
+          <Link href="/cart" className={`${styles.link} ${pathname === '/cart' ? styles.active : ''}`}>
+            Cart
             {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>
         </div>
@@ -48,9 +43,7 @@ export default function Navbar() {
         <button className={styles.burger} onClick={() => setOpen((o) => !o)} aria-label="Menu">
           {cartCount > 0 && !open && <span className={styles.burgerBadge}>{cartCount}</span>}
           <span className={`${styles.burgerIcon} ${open ? styles.burgerOpen : ''}`}>
-            <span />
-            <span />
-            <span />
+            <span /><span /><span />
           </span>
         </button>
       </div>
@@ -58,20 +51,14 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className={styles.mobileMenu}>
-          <Link
-            href="/shop"
-            className={`${styles.mobileLink} ${pathname === '/shop' ? styles.mobileActive : ''}`}
-            onClick={() => setOpen(false)}
-          >
+          <Link href="/shop" className={`${styles.mobileLink} ${pathname === '/shop' ? styles.mobileActive : ''}`} onClick={() => setOpen(false)}>
             🏪 Shop
           </Link>
-          <Link
-            href="/cart"
-            className={`${styles.mobileLink} ${pathname === '/cart' ? styles.mobileActive : ''}`}
-            onClick={() => setOpen(false)}
-          >
-            🛒 Cart
-            {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+          <Link href="/orders" className={`${styles.mobileLink} ${pathname === '/orders' ? styles.mobileActive : ''}`} onClick={() => setOpen(false)}>
+            📋 My Orders
+          </Link>
+          <Link href="/cart" className={`${styles.mobileLink} ${pathname === '/cart' ? styles.mobileActive : ''}`} onClick={() => setOpen(false)}>
+            🛒 Cart {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>
         </div>
       )}
