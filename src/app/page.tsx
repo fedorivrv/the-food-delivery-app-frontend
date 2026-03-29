@@ -1,5 +1,23 @@
-import { redirect } from 'next/navigation';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Login } from '@/app/login/page';
+import { Orders } from '@/app/orders/page';
+import { PrivateRoute } from '@/components/PrivateRoute/PrivateRoute';
 
-export default function Home() {
-  redirect('/shop');
-}
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Orders />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
