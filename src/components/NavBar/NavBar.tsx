@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useLayoutEffect } from 'react';
-import { useCartStore } from '@/store/carStore';
+import { useCartStore } from '@/store/cartStore';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -12,7 +12,9 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
 
   // Only show cart count after hydration to avoid SSR mismatch
-  useLayoutEffect(() => { setMounted(true); }, []);
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
 
   const cartCount = mounted ? totalItems : 0;
 
@@ -38,21 +40,13 @@ export default function Navbar() {
             className={`${styles.link} ${pathname === '/cart' ? styles.active : ''}`}
           >
             Shopping Cart
-            {cartCount > 0 && (
-              <span className={styles.badge}>{cartCount}</span>
-            )}
+            {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>
         </div>
 
         {/* Mobile hamburger */}
-        <button
-          className={styles.burger}
-          onClick={() => setOpen((o) => !o)}
-          aria-label="Menu"
-        >
-          {cartCount > 0 && !open && (
-            <span className={styles.burgerBadge}>{cartCount}</span>
-          )}
+        <button className={styles.burger} onClick={() => setOpen((o) => !o)} aria-label="Menu">
+          {cartCount > 0 && !open && <span className={styles.burgerBadge}>{cartCount}</span>}
           <span className={`${styles.burgerIcon} ${open ? styles.burgerOpen : ''}`}>
             <span />
             <span />
@@ -77,9 +71,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
           >
             🛒 Cart
-            {cartCount > 0 && (
-              <span className={styles.badge}>{cartCount}</span>
-            )}
+            {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
           </Link>
         </div>
       )}

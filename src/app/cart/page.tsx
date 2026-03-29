@@ -1,5 +1,5 @@
 'use client';
-import { useCartStore } from '@/store/carStore';
+import { useCartStore } from '@/store/cartStore';
 import CartItem from '@/components/CarItem/CartItem';
 import OrderForm from '@/components/OrderForm/OrderForm';
 import styles from './page.module.css';

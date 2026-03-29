@@ -2,7 +2,16 @@
 import { SortOption } from '@/types/types';
 import styles from './ProductFilters.module.css';
 
-const CATEGORIES = ['Burgers', 'Chicken', 'Pizza', 'Sushi', 'Drinks', 'Desserts', 'Sides', 'Salads'];
+const CATEGORIES = [
+  'Burgers',
+  'Chicken',
+  'Pizza',
+  'Sushi',
+  'Drinks',
+  'Desserts',
+  'Sides',
+  'Salads',
+];
 
 const SORT_OPTIONS: { label: string; value: SortOption }[] = [
   { label: 'A → Z', value: 'name-asc' },

@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { Product } from '@/types/types';
-import { useCartStore } from '@/store/carStore';
+import { useCartStore } from '@/store/cartStore';
 import { useState } from 'react';
 import styles from './ProductGrid.module.css';
 
@@ -24,7 +24,13 @@ function ProductCard({ product }: { product: Product }) {
     <div className={styles.card}>
       <div className={styles.imageWrap}>
         {product.imageUrl ? (
-          <Image src={product.imageUrl} alt={product.name} className={styles.image} width={300} height={200} />
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            className={styles.image}
+            width={300}
+            height={200}
+          />
         ) : (
           <div className={styles.imagePlaceholder}>🍽️</div>
         )}
@@ -32,15 +38,10 @@ function ProductCard({ product }: { product: Product }) {
       </div>
       <div className={styles.info}>
         <h3 className={styles.name}>{product.name}</h3>
-        {product.description && (
-          <p className={styles.desc}>{product.description}</p>
-        )}
+        {product.description && <p className={styles.desc}>{product.description}</p>}
         <div className={styles.footer}>
           <span className={styles.price}>${product.price.toFixed(2)}</span>
-          <button
-            className={`${styles.addBtn} ${added ? styles.added : ''}`}
-            onClick={handleAdd}
-          >
+          <button className={`${styles.addBtn} ${added ? styles.added : ''}`} onClick={handleAdd}>
             {added ? '✓ Added' : '+ Add to Cart'}
           </button>
         </div>

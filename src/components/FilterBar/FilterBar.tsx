@@ -3,8 +3,14 @@ import { ProductCategory, SortOption } from '@/types/types';
 import styles from './FilterBar.module.css';
 
 const CATEGORY_ICONS: Record<string, string> = {
-  Burgers: '🍔', Chicken: '🍗', Pizza: '🍕', Sushi: '🍣',
-  Drinks: '🥤', Desserts: '🍰', Sides: '🍟', Salads: '🥗',
+  Burgers: '🍔',
+  Chicken: '🍗',
+  Pizza: '🍕',
+  Sushi: '🍣',
+  Drinks: '🥤',
+  Desserts: '🍰',
+  Sides: '🍟',
+  Salads: '🥗',
 };
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
@@ -57,7 +63,9 @@ export default function FilterBar({
         </div>
 
         <div className={styles.sortWrap}>
-          <label className={styles.sortLabel} htmlFor="sort-select">Sort:</label>
+          <label className={styles.sortLabel} htmlFor="sort-select">
+            Sort:
+          </label>
           <select
             id="sort-select"
             className={styles.sortSelect}
@@ -65,7 +73,9 @@ export default function FilterBar({
             onChange={(e) => onSortChange(e.target.value as SortOption)}
           >
             {SORT_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
             ))}
           </select>
         </div>

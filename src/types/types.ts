@@ -7,8 +7,14 @@ export interface Shop {
 }
 
 export type ProductCategory =
-  | 'Burgers' | 'Chicken' | 'Pizza' | 'Sushi'
-  | 'Drinks' | 'Desserts' | 'Sides' | 'Salads';
+  | 'Burgers'
+  | 'Chicken'
+  | 'Pizza'
+  | 'Sushi'
+  | 'Drinks'
+  | 'Desserts'
+  | 'Sides'
+  | 'Salads';
 
 export interface Product {
   _id: string;
@@ -39,10 +45,31 @@ export interface OrderFormErrors {
   address?: string;
 }
 
-export interface Order {
-  items: { productId: string; name: string; price: number; quantity: number }[];
+export interface OrderItem {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+export interface HistoryOrder {
+  _id: string;
+  items: OrderItem[];
   customerInfo: OrderFormData;
   totalPrice: number;
+  status: 'pending' | 'confirmed' | 'delivered' | 'cancelled';
+  createdAt: string;
+}
+
+export interface PaginatedProducts {
+  products: Product[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
 }
 
 export type SortOption = 'name-asc' | 'price-asc' | 'price-desc';

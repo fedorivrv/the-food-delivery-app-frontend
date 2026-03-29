@@ -1,6 +1,6 @@
 'use client';
 import { CartItem } from '@/types/types';
-import { useCartStore } from '@/store/carStore';
+import { useCartStore } from '@/store/cartStore';
 import styles from './CartItem.module.css';
 
 interface Props {

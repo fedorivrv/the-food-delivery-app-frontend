@@ -133,13 +133,26 @@
 
 /* ---- Extra responsive rules ---- */
 @media (max-width: 640px) {
-  .page { padding: 20px 0 48px; }
-  .title { font-size: 26px; }
-  .totalPrice { font-size: 22px; }
+  .page {
+    padding: 20px 0 48px;
+  }
+  .title {
+    font-size: 26px;
+  }
+  .totalPrice {
+    font-size: 22px;
+  }
 }
 
 @media (max-width: 640px) {
-  .page { padding: 16px 0 48px; }
-  .container { padding: 0 16px; gap: 20px; }
-  .title { font-size: 26px; }
+  .page {
+    padding: 16px 0 48px;
+  }
+  .container {
+    padding: 0 16px;
+    gap: 20px;
+  }
+  .title {
+    font-size: 26px;
+  }
 }

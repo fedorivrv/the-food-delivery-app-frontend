@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCartStore } from '@/store/carStore';
+import { useCartStore } from '@/store/cartStore';
 import { createOrder } from '@/lib/api';
 import { OrderFormData, OrderFormErrors } from '@/types/types';
 import styles from './OrderForm.module.css';

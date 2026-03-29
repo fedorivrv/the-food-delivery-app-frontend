@@ -16,10 +16,10 @@ App runs at **http://localhost:3000**
 
 ## Pages
 
-| Route    | Description                              |
-|----------|------------------------------------------|
-| `/shop`  | Browse shops & add products to cart      |
-| `/cart`  | Review cart, fill in details, submit     |
+| Route   | Description                          |
+| ------- | ------------------------------------ |
+| `/shop` | Browse shops & add products to cart  |
+| `/cart` | Review cart, fill in details, submit |
 
 ## Project Structure
 
