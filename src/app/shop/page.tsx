@@ -38,16 +38,30 @@ export default function ShopPage() {
 
   // Load shops
   useEffect(() => {
-    setLoadingShops(true);
-    getShops()
-      .then((res) => {
-        setAllShops(res.data);
-        setShops(res.data);
-        if (res.data.length > 0) setSelectedShop(res.data[0]);
-      })
-      .catch(() => setError('Failed to load shops'))
-      .finally(() => setLoadingShops(false));
-  }, []);
+  setLoadingShops(true);
+
+  getShops()
+    .then((res) => {
+      console.log('SHOPS RESPONSE:', res.data);
+
+      // ⚠️ універсальна обробка (під будь-який бек)
+      const shopsData = Array.isArray(res.data)
+        ? res.data
+        : res.data?.shops || res.data?.data || [];
+
+      setAllShops(shopsData);
+      setShops(shopsData);
+
+      if (shopsData.length > 0) {
+        setSelectedShop(shopsData[0]);
+      }
+    })
+    .catch((err) => {
+      console.error('LOAD SHOPS ERROR:', err);
+      setError(err?.message || 'Failed to load shops');
+    })
+    .finally(() => setLoadingShops(false));
+}, []);
 
   // Filter shops by rating
   useEffect(() => {
