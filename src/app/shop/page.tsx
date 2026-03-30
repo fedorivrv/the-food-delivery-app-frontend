@@ -61,8 +61,7 @@ export default function ShopPage() {
     setLoadingShops(true);
 
     getShops()
-      .then((res) => {
-        console.log('SHOPS RESPONSE:', res.data);
+      .then((res) => {       
 
         const data = res.data as ShopsResponse;
 
@@ -83,8 +82,7 @@ export default function ShopPage() {
           setSelectedShop(shopsData[0]);
         }
       })
-      .catch((err) => {
-        console.error('LOAD SHOPS ERROR:', err);
+      .catch((err) => {       
         setError(err?.message || 'Failed to load shops');
       })
       .finally(() => setLoadingShops(false));
@@ -133,8 +131,7 @@ export default function ShopPage() {
       setProducts(data.products);
       setHasMore(data.pagination.hasMore);
       setPage(2);
-    } catch (err) {
-      console.error(err);
+    } catch (err) {     
       setError('Failed to load products');
     } finally {
       setLoadingProducts(false);
@@ -167,7 +164,7 @@ export default function ShopPage() {
       setHasMore(data.pagination.hasMore);
       setPage((p) => p + 1);
     } catch (err) {
-      console.error(err);
+            
       setError('Failed to load more products');
     } finally {
       setLoadingMore(false);
