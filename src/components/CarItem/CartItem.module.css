@@ -97,6 +97,10 @@
   color: var(--accent);
 }
 
+.qtyBtn:active {
+  transform: translateY(1px);
+}
+
 .qtyVal {
   width: 30px;
   text-align: center;

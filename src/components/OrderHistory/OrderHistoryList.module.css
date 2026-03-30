@@ -226,6 +226,10 @@
   transform: translateY(-1px);
 }
 
+.reorderBtn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
 .reorderBtn:disabled { opacity: 0.65; cursor: not-allowed; }
 
 .reorderBtn.reordered {

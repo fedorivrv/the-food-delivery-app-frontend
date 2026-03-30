@@ -83,7 +83,7 @@
 
 .sortSelect {
   padding: 7px 12px;
-  background: var(--surface);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
@@ -101,6 +101,7 @@
 
 .sortSelect:focus {
   border-color: var(--accent);
+  box-shadow: var(--ring);
 }
 .sortSelect option {
   background: var(--surface-2);

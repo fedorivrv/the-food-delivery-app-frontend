@@ -41,7 +41,10 @@ function ProductCard({ product }: { product: Product }) {
         {product.description && <p className={styles.desc}>{product.description}</p>}
         <div className={styles.footer}>
           <span className={styles.price}>${product.price.toFixed(2)}</span>
-          <button className={`${styles.addBtn} ${added ? styles.added : ''}`} onClick={handleAdd}>
+          <button
+            className={`btnPrimary ${styles.addBtn} ${added ? styles.added : ''}`}
+            onClick={handleAdd}
+          >
             {added ? '✓ Added' : '+ Add to Cart'}
           </button>
         </div>

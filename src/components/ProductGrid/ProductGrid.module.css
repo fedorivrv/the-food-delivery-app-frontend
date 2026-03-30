@@ -107,22 +107,13 @@
 }
 
 .addBtn {
-  padding: 7px 14px;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
+  padding: 8px 14px;
+  min-height: 34px;
   font-size: 13px;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.2s;
   white-space: nowrap;
 }
 
 .addBtn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--bg);
   box-shadow: var(--shadow-accent);
 }
 
@@ -135,9 +126,10 @@
 .skeleton {
   height: 260px;
   border-radius: var(--radius-lg);
-  background: var(--surface);
+  background: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 50%, var(--surface) 100%);
   border: 1px solid var(--border);
-  animation: shimmer 1.5s ease infinite;
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
 }
 
 .empty {
@@ -168,13 +160,8 @@
 }
 
 @keyframes shimmer {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 /* Responsive */
@@ -188,20 +175,4 @@
   .grid {
     grid-template-columns: 1fr;
   }
-}
-
-.categoryBadge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 3px 10px;
-  background: rgba(14, 12, 10, 0.75);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
 }

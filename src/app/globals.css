@@ -1,41 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:wght@400..800&display=swap');
 
 :root {
-  --bg: #0e0c0a;
-  --surface: #181410;
-  --surface-2: #221e18;
-  --surface-3: #2e2820;
-  --border: #3a3228;
-  --border-light: #4a4038;
+  /* 2026 palette: neutral dark + cool accent */
+  --bg: #0b1020;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-2: rgba(255, 255, 255, 0.09);
+  --surface-3: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.10);
+  --border-light: rgba(255, 255, 255, 0.16);
 
-  --accent: #e8a840;
-  --accent-dark: #c48820;
-  --accent-glow: rgba(232, 168, 64, 0.15);
-  --accent-dim: rgba(232, 168, 64, 0.6);
+  --accent: #22d3ee;       /* cyan */
+  --accent-dark: #06b6d4;  /* deeper cyan */
+  --accent-glow: rgba(34, 211, 238, 0.18);
+  --accent-dim: rgba(34, 211, 238, 0.65);
 
-  --text-primary: #f5ede0;
-  --text-secondary: #a89880;
-  --text-muted: #6b5e50;
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.50);
 
-  --success: #5fa85a;
-  --error: #c0534a;
-  --error-bg: rgba(192, 83, 74, 0.1);
+  --success: #34d399;
+  --error: #fb7185;
+  --error-bg: rgba(251, 113, 133, 0.12);
 
   --radius-sm: 6px;
   --radius: 12px;
   --radius-lg: 20px;
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.7);
-  --shadow-accent: 0 4px 24px rgba(232, 168, 64, 0.2);
+  --shadow-accent: 0 6px 28px rgba(34, 211, 238, 0.18);
 
   --container: 1120px;
   --ring: 0 0 0 3px var(--accent-glow);
-  --ring-error: 0 0 0 3px rgba(192, 83, 74, 0.16);
+  --ring-error: 0 0 0 3px rgba(251, 113, 133, 0.18);
 }
 
 *,
@@ -94,8 +95,8 @@ img {
   min-height: calc(100vh - 64px);
   padding: 28px 0 64px;
   background:
-    radial-gradient(1200px 700px at 15% -10%, rgba(232, 168, 64, 0.10), transparent 60%),
-    radial-gradient(900px 500px at 85% 0%, rgba(232, 168, 64, 0.06), transparent 55%);
+    radial-gradient(1100px 680px at 10% -10%, rgba(34, 211, 238, 0.14), transparent 58%),
+    radial-gradient(900px 520px at 88% 0%, rgba(99, 102, 241, 0.12), transparent 55%);
 }
 
 .container {
