@@ -1,63 +1,61 @@
-# Food Delivery — Frontend
+# Food Delivery — Frontend (Next.js)
 
-Built with **Next.js 14** (App Router), **TypeScript**, **Zustand**, **Axios**, **CSS Modules**.
+Modern Next.js (App Router) storefront UI: browse shops & products, manage cart, place orders, and search order history.
 
-## Getting Started
+## Requirements
+
+- Node.js 20+
+- Backend running (see backend README)
+
+## Quick start
 
 ```bash
-# Install dependencies
 npm install
+
+# Create env file
+cp .env.example .env
 
 # Run dev server
 npm run dev
 ```
 
-App runs at **http://localhost:3000**
+App: `http://localhost:3000`
 
-## Pages
+## Environment variables
 
-| Route   | Description                          |
-| ------- | ------------------------------------ |
-| `/shop` | Browse shops & add products to cart  |
-| `/cart` | Review cart, fill in details, submit |
+Create `.env` from `.env.example`.
 
-## Project Structure
+| Variable | Required | Example |
+|---|---:|---|
+| `NEXT_PUBLIC_API_URL` | yes | `http://localhost:4000/api` |
+
+## Routes
+
+| Route | Description |
+|---|---|
+| `/shop` | Browse shops, filter/sort products, add to cart |
+| `/cart` | Review cart + place an order |
+| `/orders` | Find order history (email+phone or orderId) + reorder |
+| `/login` | Demo login (stores JWT in localStorage) |
+
+## Project structure
 
 ```
 src/
-├── app/
-│   ├── layout.tsx          # Root layout + Navbar
-│   ├── page.tsx            # Redirects → /shop
-│   ├── shop/
-│   │   ├── page.tsx        # Shop page
-│   │   └── page.module.css
-│   └── cart/
-│       ├── page.tsx        # Cart page
-│       └── page.module.css
-├── components/
-│   ├── Navbar/
-│   ├── ShopList/
-│   ├── ProductGrid/
-│   ├── CartItem/
-│   └── OrderForm/          # With full validation
-├── store/
-│   └── cartStore.ts        # Zustand (persisted)
-├── lib/
-│   └── api.ts              # Axios instance + endpoints
-├── types/
-│   └── types.ts            # Shared TypeScript types
-└── styles/
-    └── globals.css         # CSS variables, reset, fonts
+├── app/                    # Next App Router pages
+├── components/             # UI components (CSS Modules)
+├── lib/                    # API client + domain calls
+├── store/                  # Zustand stores
+└── types/                  # Shared TS types
 ```
 
-## Features
+## Scripts
 
-- Browse shops from sidebar, click to load products
-- Add products to cart (persisted in localStorage via Zustand)
-- Cart page: adjust quantity, remove items, see live total
-- Order form: real-time validation on blur + on submit
-  - Name (required, min 2 chars)
-  - Email (required, valid format)
-  - Phone (required, valid format)
-  - Address (required, min 10 chars)
-- Success state with auto-redirect after submit
+```bash
+npm run dev
+npm run build
+npm start
+npm run lint
+npm run lint:fix
+npm run format
+```
