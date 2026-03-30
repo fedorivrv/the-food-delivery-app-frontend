@@ -28,7 +28,7 @@ function validate(mode: SearchMode, form: FormState): FormErrors {
     else if (!/^\+?[\d\s\-()]{7,15}$/.test(form.phone)) errors.phone = 'Enter a valid phone number';
   } else {
     if (!form.orderId.trim()) errors.orderId = 'Order ID is required';
-    else if (form.orderId.trim().length !== 24) errors.orderId = 'Order ID must be 24 characters';
+    else if (!/^[a-f\d]{24}$/i.test(form.orderId.trim())) errors.orderId = 'Order ID must be a 24-char hex string';
   }
   return errors;
 }
@@ -69,10 +69,10 @@ export default function OrdersPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const allTouched: Record<string, boolean> = mode === 'credentials'
-  ? { email: true, phone: true }
-  : { orderId: true };
-setTouched(allTouched);
+
+    const allTouched: Record<string, boolean> = mode === 'credentials' ? { email: true, phone: true } : { orderId: true };
+    setTouched(allTouched);
+
     const validationErrors = validate(mode, form);
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
@@ -81,9 +81,10 @@ setTouched(allTouched);
     setServerError(null);
 
     try {
-      const params = mode === 'credentials'
-        ? { email: form.email.trim(), phone: form.phone.trim() }
-        : { orderId: form.orderId.trim() };
+      const params =
+        mode === 'credentials'
+          ? { email: form.email.trim(), phone: form.phone.trim() }
+          : { orderId: form.orderId.trim() };
 
       const res = await searchOrders(params);
       setOrders(res.data);
@@ -99,16 +100,12 @@ setTouched(allTouched);
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-
-        {/* Header */}
         <div className={styles.header}>
           <h1 className={styles.title}>Order History</h1>
           <p className={styles.subtitle}>Find your past orders and reorder with one click</p>
         </div>
 
-        {/* Search card */}
         <div className={styles.searchCard}>
-          {/* Mode tabs */}
           <div className={styles.tabs}>
             <button
               className={`${styles.tab} ${mode === 'credentials' ? styles.tabActive : ''}`}
@@ -130,7 +127,9 @@ setTouched(allTouched);
             {mode === 'credentials' ? (
               <div className={styles.fields}>
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="email">Email</label>
+                  <label className={styles.label} htmlFor="email">
+                    Email
+                  </label>
                   <input
                     id="email"
                     name="email"
@@ -142,13 +141,13 @@ setTouched(allTouched);
                     className={`${styles.input} ${errors.email && touched.email ? styles.inputError : ''}`}
                     autoComplete="email"
                   />
-                  {errors.email && touched.email && (
-                    <span className={styles.errorMsg}>{errors.email}</span>
-                  )}
+                  {errors.email && touched.email && <span className={styles.errorMsg}>{errors.email}</span>}
                 </div>
 
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="phone">Phone</label>
+                  <label className={styles.label} htmlFor="phone">
+                    Phone
+                  </label>
                   <input
                     id="phone"
                     name="phone"
@@ -160,15 +159,15 @@ setTouched(allTouched);
                     className={`${styles.input} ${errors.phone && touched.phone ? styles.inputError : ''}`}
                     autoComplete="tel"
                   />
-                  {errors.phone && touched.phone && (
-                    <span className={styles.errorMsg}>{errors.phone}</span>
-                  )}
+                  {errors.phone && touched.phone && <span className={styles.errorMsg}>{errors.phone}</span>}
                 </div>
               </div>
             ) : (
               <div className={styles.fields}>
                 <div className={styles.field}>
-                  <label className={styles.label} htmlFor="orderId">Order ID</label>
+                  <label className={styles.label} htmlFor="orderId">
+                    Order ID
+                  </label>
                   <input
                     id="orderId"
                     name="orderId"
@@ -177,20 +176,18 @@ setTouched(allTouched);
                     value={form.orderId}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`${styles.input} ${styles.monoInput} ${errors.orderId && touched.orderId ? styles.inputError : ''}`}
+                    className={`${styles.input} ${styles.monoInput} ${
+                      errors.orderId && touched.orderId ? styles.inputError : ''
+                    }`}
                     autoComplete="off"
                     spellCheck={false}
                   />
-                  {errors.orderId && touched.orderId && (
-                    <span className={styles.errorMsg}>{errors.orderId}</span>
-                  )}
+                  {errors.orderId && touched.orderId && <span className={styles.errorMsg}>{errors.orderId}</span>}
                 </div>
               </div>
             )}
 
-            {serverError && (
-              <div className={styles.serverError}>{serverError}</div>
-            )}
+            {serverError && <div className={styles.serverError}>{serverError}</div>}
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
               {loading ? <span className={styles.spinner} /> : 'Find Orders'}
@@ -198,7 +195,6 @@ setTouched(allTouched);
           </form>
         </div>
 
-        {/* Results */}
         {searched && (
           <div className={styles.results}>
             {orders.length === 0 ? (
@@ -206,9 +202,7 @@ setTouched(allTouched);
                 <span className={styles.emptyIcon}>📭</span>
                 <p className={styles.emptyTitle}>No orders found</p>
                 <span className={styles.emptyHint}>
-                  {mode === 'credentials'
-                    ? 'Check your email and phone number and try again'
-                    : 'Check the Order ID and try again'}
+                  {mode === 'credentials' ? 'Check your email and phone number and try again' : 'Check the Order ID and try again'}
                 </span>
               </div>
             ) : (

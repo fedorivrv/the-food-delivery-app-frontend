@@ -1,0 +1,142 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.hero {
+  padding: 18px 0;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: -0.8px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  max-width: 52ch;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.perks {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+  max-width: 460px;
+}
+
+.perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: rgba(34, 30, 24, 0.6);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.perkIcon {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(232, 168, 64, 0.10);
+  border: 1px solid rgba(232, 168, 64, 0.25);
+}
+
+.card {
+  padding: 22px;
+  position: sticky;
+  top: 92px;
+}
+
+.cardHeader {
+  margin-bottom: 14px;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.2px;
+}
+
+.cardHint {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.error {
+  background: var(--error-bg);
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-top-color: var(--bg);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    position: static;
+  }
+  .title {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+  }
+}

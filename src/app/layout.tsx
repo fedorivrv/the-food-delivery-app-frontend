@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Navbar />
-        <main>{children}</main>
+        <main className="appMain">{children}</main>
       </body>
     </html>
   );
