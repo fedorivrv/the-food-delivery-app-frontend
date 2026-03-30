@@ -1,25 +1,51 @@
 import axios from 'axios';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+import type { PaginatedProducts, Shop } from '@/types/types';
 
 export const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  // We use Bearer tokens (localStorage), not cookies — credentials would trigger stricter CORS.
+  withCredentials: false,
 });
 
-export const getShops = (params?: { minRating?: number; maxRating?: number }) =>
-  api.get('/shops', { params });
+api.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-export const getProductsByShop = (
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export function getShops(params?: { minRating?: number; maxRating?: number }) {
+  return api.get<Shop[]>('/shops', { params });
+}
+
+export function getProductsByShop(
   shopId: string,
   params?: { categories?: string; sort?: string; page?: number; limit?: number }
-) => api.get(`/shops/${shopId}/products`, { params });
+) {
+  return api.get<PaginatedProducts>(`/shops/${shopId}/products`, { params });
+}
 
-export const createOrder = (orderData: object) => api.post('/orders', orderData);
+export function createOrder(data: {
+  items: Array<{ productId: string; quantity: number }>;
+  customerInfo: { name: string; email: string; phone: string; address: string };
+}) {
+  return api.post('/orders', data);
+}
 
-// Search orders by email+phone OR orderId
-export const searchOrders = (params: {
-  email?: string;
-  phone?: string;
-  orderId?: string;
-}) => api.get('/orders/search', { params });
+export function searchOrders(params: { email: string; phone: string } | { orderId: string }) {
+  return api.get('/orders/search', { params });
+}

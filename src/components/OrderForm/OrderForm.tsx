@@ -92,12 +92,9 @@ export default function OrderForm() {
       await createOrder({
         items: items.map((i) => ({
           productId: i.product._id,
-          name: i.product.name,
-          price: i.product.price,
           quantity: i.quantity,
         })),
         customerInfo: form,
-        totalPrice,
       });
 
       setSuccess(true);
